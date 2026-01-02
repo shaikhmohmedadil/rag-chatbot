@@ -1,0 +1,9 @@
+langchain==0.1.0
+langchain-openai==0.0.5
+langchain-community==0.0.13
+chromadb==0.4.22
+openai==1.10.0
+streamlit==1.30.0
+python-dotenv==1.0.0
+pypdf==3.17.4
+tiktoken==0.5.2

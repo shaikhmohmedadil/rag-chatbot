@@ -1,0 +1,18 @@
+Welcome to TechCorp!
+
+About Us:
+TechCorp is an AI consulting company based in India.
+We help businesses implement AI solutions.
+
+Services:
+- AI Consulting
+- Custom ChatBot Development  
+- Data Analysis
+
+Contact:
+Email: hello@techcorp.com
+Phone: +91-9876543210
+
+Pricing:
+Basic Plan: ₹10,000/month
+Premium Plan: ₹25,000/month
