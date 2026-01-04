@@ -11,6 +11,9 @@ from langchain.memory import ConversationBufferMemory  # Remembers conversation 
 # from langchain.prompts import PromptTemplate  
 from dotenv import load_dotenv  # Loads API key from .env file
 
+import os
+
+
 # ============================================
 # LOAD API KEY
 # ============================================
@@ -58,7 +61,9 @@ if "chain" not in st.session_state:
     print("Loading vector database...")  # Shows in terminal (not visible to user)
     
     # Create embeddings tool (converts text to vectors)
-    embeddings = OpenAIEmbeddings()
+    embeddings = OpenAIEmbeddings(
+         openai_api_key=os.environ.get("OPENAI_API_KEY") 
+    )
     
     # Load the chroma_db folder you created with ingest.py
     vectorstore = Chroma(
