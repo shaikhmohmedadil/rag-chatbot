@@ -23,19 +23,40 @@ st.set_page_config(
     layout="centered"  # Chat appears in center (not full width)
 )
 
+api_key = None
+
+# Try st.secrets first (for Streamlit Cloud)
 try:
-    # Streamlit Cloud
     api_key = st.secrets["OPENAI_API_KEY"]
-    os.environ["OPENAI_API_KEY"] = api_key
-except (FileNotFoundError, KeyError):
-    # Local development - load from .env
+    st.success("✅ API key loaded from Streamlit secrets")
+except Exception as e:
+    st.warning(f"⚠️ Could not load from secrets: {str(e)}")
+    # Try .env file (for local)
     load_dotenv()
     api_key = os.getenv("OPENAI_API_KEY")
+    if api_key:
+        st.success("✅ API key loaded from .env file")
 
-# Verify API key exists
-if not api_key or api_key == "":
-    st.error("❌ OPENAI_API_KEY not found! Please add it to Streamlit Secrets or .env file")
+# Verify API key exists and is valid
+if not api_key:
+    st.error("❌ OPENAI_API_KEY not found!")
+    st.info("📝 Please add your OpenAI API key to:")
+    st.code("""
+# In Streamlit Cloud: Settings → Secrets
+OPENAI_API_KEY = "sk-proj-..."
+
+# Or locally: Create .env file
+OPENAI_API_KEY=sk-proj-...
+    """)
     st.stop()
+
+if not api_key.startswith("sk-"):
+    st.error("❌ Invalid API key format! Should start with 'sk-'")
+    st.info(f"Found: {api_key[:10]}... (length: {len(api_key)})")
+    st.stop()
+
+# Set environment variable for LangChain
+os.environ["OPENAI_API_KEY"] = api_key
 
 # ============================================
 # LOAD API KEY
