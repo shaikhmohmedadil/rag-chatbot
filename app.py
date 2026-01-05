@@ -11,8 +11,8 @@ import os
 import openai, langchain_openai, streamlit as st
 
 st.set_page_config(
-    page_title="TechCorp AI Assistant",
-    page_icon="🤖",
+    page_title="Interkultureller Garten Coswig Assistant",
+    page_icon="🌱",
     layout="centered"
 )
 
@@ -30,8 +30,8 @@ if "OPENAI_API_KEY" not in os.environ:
 # ============================================
 # DISPLAY TITLE
 # ============================================
-st.title("🤖 TechCorp Assistant")
-st.caption("Ask me anything about TechCorp!")
+st.title("🌿 Interkultureller Garten Coswig Assistant")
+st.caption("Frag mich alles über den Interkulturellen Garten Coswig e.V.")
 
 # ============================================
 # INITIALIZE SESSION STATE
