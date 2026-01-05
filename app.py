@@ -10,14 +10,8 @@ from langchain.chains import ConversationalRetrievalChain  # Handles Q&A with me
 from langchain.memory import ConversationBufferMemory  # Remembers conversation history
 # from langchain.prompts import PromptTemplate  
 from dotenv import load_dotenv  # Loads API key from .env file
-
 import os
 
-
-# ============================================
-# LOAD API KEY
-# ============================================
-# load_dotenv()  # Reads .env file and loads OPENAI_API_KEY
 
 # ============================================
 # PAGE CONFIGURATION
@@ -34,6 +28,12 @@ if "OPENAI_API_KEY" not in os.environ:  # ← Uses st.secrets
         os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]  # ← Accesses st.secrets!
     except:
         load_dotenv()
+
+# ============================================
+# LOAD API KEY
+# ============================================
+# load_dotenv()  # Reads .env file and loads OPENAI_API_KEY
+
 
 # ============================================
 # DISPLAY TITLE AND DESCRIPTION
