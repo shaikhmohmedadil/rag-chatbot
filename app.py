@@ -81,7 +81,7 @@ if "chain" not in st.session_state:
     # ----------------------------------------
     with st.spinner("Loading vector database..."):
         try:
-            embeddings = OpenAIEmbeddings()
+            embeddings = OpenAIEmbeddings(openai_api_key=api_key)
             
             vectorstore = Chroma(
                 persist_directory="./chroma_db",
