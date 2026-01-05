@@ -11,12 +11,13 @@ from langchain.memory import ConversationBufferMemory  # Remembers conversation 
 # from langchain.prompts import PromptTemplate  
 from dotenv import load_dotenv  # Loads API key from .env file
 
+import os
 
 
 # ============================================
 # LOAD API KEY
 # ============================================
-load_dotenv()  # Reads .env file and loads OPENAI_API_KEY
+# load_dotenv()  # Reads .env file and loads OPENAI_API_KEY
 
 # ============================================
 # PAGE CONFIGURATION
@@ -27,6 +28,12 @@ st.set_page_config(
     page_icon="🤖",  # Browser tab icon
     layout="centered"  # Chat appears in center (not full width)
 )
+
+if "OPENAI_API_KEY" not in os.environ:  # ← Uses st.secrets
+    try:
+        os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]  # ← Accesses st.secrets!
+    except:
+        load_dotenv()
 
 # ============================================
 # DISPLAY TITLE AND DESCRIPTION
