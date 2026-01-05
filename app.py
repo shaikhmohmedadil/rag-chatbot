@@ -10,8 +10,7 @@ from dotenv import load_dotenv
 import os
 import openai, langchain_openai, streamlit as st
 
-st.write("openai:", openai.__version__)
-# st.write("langchain-openai:", langchain_openai.__version__)
+
 
 # ============================================
 # PAGE CONFIGURATION - MUST BE FIRST!
@@ -21,6 +20,9 @@ st.set_page_config(
     page_icon="🤖",
     layout="centered"
 )
+
+st.write("openai:", openai.__version__)
+# st.write("langchain-openai:", langchain_openai.__version__)
 
 # ============================================
 # LOAD API KEY - WITH DEBUGGING
