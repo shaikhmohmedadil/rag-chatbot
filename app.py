@@ -23,11 +23,19 @@ st.set_page_config(
     layout="centered"  # Chat appears in center (not full width)
 )
 
-if "OPENAI_API_KEY" not in os.environ:  # ← Uses st.secrets
-    try:
-        os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]  # ← Accesses st.secrets!
-    except:
-        load_dotenv()
+try:
+    # Streamlit Cloud
+    api_key = st.secrets["OPENAI_API_KEY"]
+    os.environ["OPENAI_API_KEY"] = api_key
+except (FileNotFoundError, KeyError):
+    # Local development - load from .env
+    load_dotenv()
+    api_key = os.getenv("OPENAI_API_KEY")
+
+# Verify API key exists
+if not api_key or api_key == "":
+    st.error("❌ OPENAI_API_KEY not found! Please add it to Streamlit Secrets or .env file")
+    st.stop()
 
 # ============================================
 # LOAD API KEY
@@ -67,7 +75,7 @@ if "chain" not in st.session_state:
     print("Loading vector database...")  # Shows in terminal (not visible to user)
     
     # Create embeddings tool (converts text to vectors)
-    embeddings = OpenAIEmbeddings()
+    embeddings = OpenAIEmbeddings(openai_api_key=api_key)
     
     # Load the chroma_db folder you created with ingest.py
     vectorstore = Chroma(
