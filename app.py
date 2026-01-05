@@ -26,20 +26,6 @@ if "OPENAI_API_KEY" not in os.environ:
     except:
         load_dotenv()
 
-# ============================================
-# AUTO-CREATE VECTOR DATABASE IF MISSING
-# ============================================
-# Professional approach: Check if chroma_db exists, create if not
-if not os.path.exists("./chroma_db"):
-    with st.spinner("📚 Creating knowledge base for first time..."):
-        try:
-            from ingest import ingest_documents
-            ingest_documents()
-            st.success("✅ Knowledge base created!")
-        except Exception as e:
-            st.error(f"❌ Error creating knowledge base: {e}")
-            st.info("💡 Make sure data/sample.txt exists with your content")
-            st.stop()
 
 # ============================================
 # DISPLAY TITLE
