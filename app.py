@@ -8,6 +8,10 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
 from dotenv import load_dotenv
 import os
+import openai, langchain_openai, streamlit as st
+
+st.write("openai:", openai.__version__)
+st.write("langchain-openai:", langchain_openai.__version__)
 
 # ============================================
 # PAGE CONFIGURATION - MUST BE FIRST!
